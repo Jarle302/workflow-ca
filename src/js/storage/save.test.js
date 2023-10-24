@@ -1,5 +1,5 @@
 import { save } from "./save";
-import { localstorageMuckFactory } from "../mocks/fetchMock";
+import { localstorageMuckFactory } from "../mocks/localStorageMock";
 global.localStorage = localstorageMuckFactory();
 
 describe("saves a key, and a stringified value localstorage", () => {
