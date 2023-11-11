@@ -1,4 +1,4 @@
-export function localstorageMuckFactory() {
+export function localstorageMockFactory() {
   let storage = {};
   const localStorageMock = {
     setItem: jest.fn((key, value) => {

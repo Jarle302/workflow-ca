@@ -1,6 +1,6 @@
 import { save } from "./save";
-import { localstorageMuckFactory } from "../mocks/localStorageMock";
-global.localStorage = localstorageMuckFactory();
+import { localstorageMockFactory } from "../mocks/localStorageMock";
+global.localStorage = localstorageMockFactory();
 
 describe("saves a key, and a stringified value localstorage", () => {
   it("saves a key and value to localstorage", () => {

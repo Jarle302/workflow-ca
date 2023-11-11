@@ -1,8 +1,8 @@
-import { localstorageMuckFactory } from "../mocks/localStorageMock.js";
+import { localstorageMockFactory } from "../mocks/localStorageMock.js";
 import { load } from "./load.js";
 import { save } from "./save.js";
 
-global.localStorage = localstorageMuckFactory();
+global.localStorage = localstorageMockFactory();
 
 it("gets a parsed value from localstorage using a key", () => {
   save("test", 345);

@@ -1,4 +1,4 @@
-import { localstorageMuckFactory } from "../../mocks/localStorageMock.js";
+import { localstorageMockFactory } from "../../mocks/localStorageMock.js";
 import { login } from "./login.js";
 
 import { mockFetchFail, mockFetchPass } from "../../mocks/fetch_Mock.js";
@@ -8,7 +8,7 @@ describe(`if ok, saves a token in localstorage,
 deletes the token from the response object,
 and return it,else it throws`, () => {
   beforeEach(() => {
-    global.localStorage = localstorageMuckFactory();
+    global.localStorage = localstorageMockFactory();
   });
   it("saves a token in localstorage if response.ok", async () => {
     await login("john@doe.com", "password");

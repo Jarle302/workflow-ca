@@ -17,26 +17,13 @@ describe("the user can log in and access their profile", () => {
     cy.get("#loginEmail").type(username);
     cy.get("#loginPassword").type(password);
     cy.get("#loginModal button:contains('Login')").click();
-  });
-  it("Can logout using the logout button", () => {
-    cy.wait(1000);
-    cy.get(".modal-footer button[type='button']:contains('Login')").click();
-    cy.wait(1000);
+    cy.get("#loginModal").should("not.be.visible");
     cy.get("#registerModal").should("not.be.visible");
-    cy.get("#loginModal").should("be.visible");
-    cy.get("#loginEmail").type(username);
-    cy.get("#loginPassword").type(password);
-    cy.get("#loginModal button:contains('Login')").click();
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      // Return false to prevent the error from failing the test
-      // i got help with this on block  from chat-gpt
-      return false;
-    });
-
-    cy.get("button:contains('Logout')").click();
-    cy.get("#registerModal").should("be.visible");
+    cy.get("button:contains('Logout')").should("be.visible");
+    cy.get("h4.profile-name")
+      .contains(username.split("@")[0])
+      .should("be.visible");
   });
-
   it("The user cannot submit the login form with invalid credentials and is shown a message", () => {
     cy.wait(1000);
     cy.get(".modal-footer button[type='button']:contains('Login')").click();
@@ -46,11 +33,6 @@ describe("the user can log in and access their profile", () => {
     cy.get("#loginEmail").type(invalidUsername);
     cy.get("#loginPassword").type(invalidPassword);
     cy.get("#loginModal button:contains('Login')").click();
-    /*Cypress.on('uncaught:exception', (err, runnable) => {
-        // Return false to prevent the error from failing the test
-        // i got help with this on block  from chat-gpt 
-        return false;
-    });*/
     cy.url().should("include", loginPage);
     cy.window()
       .then((w) => {

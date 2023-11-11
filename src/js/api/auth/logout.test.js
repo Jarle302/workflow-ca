@@ -1,23 +1,20 @@
-import { remove } from "../../storage";
-import { localstorageMuckFactory } from "../../mocks/localStorageMock";
+import { localstorageMockFactory } from "../../mocks/localStorageMock";
 import { mockFetchPass } from "../../mocks/fetch_Mock";
+import { logout } from "./logout";
 global.fetch = mockFetchPass;
 
 describe("it removes 'token' and 'profile' from localstorage", () => {
   beforeEach(() => {
-    global.localStorage = localstorageMuckFactory();
+    global.localStorage = localstorageMockFactory();
     localStorage.setItem("token", JSON.stringify(542));
     localStorage.setItem(
       "profile",
       JSON.stringify({ name: "test", email: "lala@john.doe" }),
     );
   });
-  it("removes 'token from localstorage'", () => {
-    remove("token");
+  it("removes 'token and profile from  from localstorage'", () => {
+    logout();
     expect(localStorage.getItem("token")).toBeUndefined();
-  });
-  it("removes 'profile from localstorage'", () => {
-    remove("profile");
     expect(localStorage.getItem("profile")).toBeUndefined();
   });
 });
